@@ -296,6 +296,8 @@ bind v copy-mode
 
 # Bind Esc to exit copy-mode
 bind-key -T copy-mode-vi 'Escape' send -X cancel
+bind ] paste-buffer
+bind P run "wl-paste --no-newline | tmux load-buffer - && tmux paste-buffer"
 
 # start selecting text with "v", this is visual mode
 bind-key -T copy-mode-vi 'v' send -X begin-selection
