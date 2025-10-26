@@ -1,9 +1,9 @@
-# Filename: ~/github/dotfiles-latest/starship-config/starship-eldritch.toml
+# filename: ~/github/dotfiles-latest/starship-config/starship-eldritch.toml
 # ~/github/dotfiles-latest/starship-config/starship-eldritch.toml
 
 # https://starship.rs/config/#git-branch
 
-# # In case you want to modify the order of the items you can do this
+# # in case you want to modify the order of the items you can do this
 # format = """
 # $username\
 # $hostname\
@@ -17,8 +17,8 @@
 # $character
 # """
 
-# This will show the time on a 2nd line
-# Add a "\" at the end of an item, if you want the next item to show on the same line
+# this will show the time on a 2nd line
+# add a "\" at the end of an item, if you want the next item to show on the same line
 format = """
 $all\
 $kubernetes
@@ -36,23 +36,23 @@ style = '#a48cf2 bold'
 disabled = false
 format = '[\[$time\]]($style) '
 # https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
-# %T	00:34:60	Hour-minute-second format. Same to %H:%M:%S.
-# time_format = '%y/%m/%d %T'
+# %t	00:34:60	hour-minute-second format. same to %h:%m:%s.
+# time_format = '%y/%m/%d %t'
 time_format = '%y/%m/%d'
 
-# For this to show up correcly, you need to have cluster access
-# So your ~/.kube/config needs to be configured on the local machine
+# for this to show up correcly, you need to have cluster access
+# so your ~/.kube/config needs to be configured on the local machine
 [kubernetes]
 disabled = false
 # context = user@cluster
 # format = '[$user@$cluster \($namespace\)](#f265b5) '
 # format = '[$cluster \($namespace\)](#f7c67f) '
-# Apply separate colors for cluster and namespace
+# apply separate colors for cluster and namespace
 format = '[$cluster](#f7c67f bold) [\($namespace\)](#37f499 bold) '
 # format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
-# Only dirs that have this file inside will show the kubernetes prompt
+# only dirs that have this file inside will show the kubernetes prompt
 # detect_files = ['900-detectkubernetes.sh']
-# detect_env_vars = ['STAR_USE_KUBE']
+# detect_env_vars = ['star_use_kube']
 # contexts = [
 #   { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
 # ]
@@ -74,4 +74,4 @@ truncate_to_repo = false
 
 [ruby]
 detect_variables = []
-detect_files = ['Gemfile', '.ruby-version']
+detect_files = ['gemfile', '.ruby-version']

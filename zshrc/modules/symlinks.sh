@@ -94,7 +94,7 @@ fi
 create_symlink ~/github/dotfiles-latest/neovim/neobean/ ~/.config/neobean
 create_symlink ~/github/dotfiles-latest/neovim/quarto-nvim-kickstarter/ ~/.config/quarto-nvim-kickstarter
 create_symlink ~/github/dotfiles-latest/neovim/kickstart.nvim/ ~/.config/kickstart.nvim
-create_symlink ~/github/dotfiles-latest/neovim/lazyvim/ ~/.config/lazyvim
+create_symlink ~/github/dotfiles-latest/neovim/lazyvim/ ~/.config/nvim
 create_symlink ~/github/dotfiles-latest/hammerspoon/ ~/.hammerspoon
 create_symlink ~/github/dotfiles-latest/karabiner/mxstbr/ ~/.config/karabiner
 create_symlink ~/github/dotfiles-latest/sketchybar/felixkratz-linkarzu/ ~/.config/sketchybar

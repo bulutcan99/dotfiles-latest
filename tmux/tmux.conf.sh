@@ -127,6 +127,19 @@ set-option -g focus-events on
 # set-hook -g pane-focus-in 'select-pane -P "bg=$linkarzu_color10,fg=white"'
 # set-hook -g pane-focus-out 'select-pane -P "bg=$linkarzu_color07,fg=default"'
 
+# This changes the colors of visual selection and choose-tree
+# https://unix.stackexchange.com/questions/141311/tmux-hightlight-colour-setting
+# set -g mode-style "fg=$linkarzu_color13,bg=$linkarzu_color03"
+# set -g mode-style "fg=#04d1f9,bg=#314154"
+# set -g mode-style "fg=blue,bg=red"
+#
+# set -g never worked for me
+# The color was applied, but then it was overriden
+# Since I'm using the catppuccin theme, found this in the catpucchin tmux repo and that did it
+# https://github.com/catppuccin/tmux/blob/fe0d245e1c971789d87ab80f492a20709af91c91/catppuccin_tmux.conf#L308-L310
+# set -wF mode-style "fg=$linkarzu_color13,bg=$linkarzu_color02"
+set -gF mode-style "fg=$linkarzu_color02,bg=$linkarzu_color13"
+
 # When pressing prefix+s to list sessions, I want them sorted by time
 # That way my latest used sessions show at the top of the list
 # -s starts with sessions collapsed (doesn't show windows)
@@ -188,17 +201,6 @@ bind - split-window -v
 # bind j select-pane -D
 # bind k select-pane -U
 # bind l select-pane -R
-
-# Switch to windows 1 through 4
-# 'p' is normally used to go to the previous window, but I won't use it
-# ctrl+b c -> new window
-# ctrl+b , -> rename current window
-# ctrl+b w -> show list of windows and sessions
-unbind p
-bind u select-window -t 1
-bind i select-window -t 2
-bind o select-window -t 3
-bind p select-window -t 4
 
 # Switch to sessions 1 through 4
 # ctrl+b : -> new -s 0 -> new session with name '0'
@@ -263,71 +265,6 @@ karabiner_rules="~/github/scripts/macos/mac/301-openKarabinerRules.sh"
 colorscheme_selector="~/github/dotfiles-latest/colorscheme/colorscheme-selector.sh"
 script_selector="~/github/dotfiles-latest/scripts/macos/mac/misc/240-systemTask.sh"
 
-# Don't use C-r because it's used by tmux-resurrect
-# Don't use C-e because I'm already using it for sending command to all panes/windows in current session
-# Don't use C-s because Its used to save the session
-# Don't use C-z, not sure what its for
-unbind C-u
-bind-key -r C-u run-shell "$tmux_sessionizer ~/github/dotfiles-latest"
-unbind C-i
-bind-key -r C-i run-shell "$tmux_sessionizer ~/github/watusy"
-unbind C-o
-# bind-key -r C-o run-shell "$tmux_sessionizer ~/github/linkarzu.github.io"
-bind-key -r C-o run-shell "$tmux_sessionizer /System/Volumes/Data/mnt/github_nfs/linkarzu.github.io"
-unbind C-p
-bind-key -r C-p run-shell "$tmux_sessionizer ~/github/scripts"
-unbind C-t
-bind-key -r C-t run-shell "$tmux_sessionizer ~/github/obsidian_main"
-unbind 4
-bind-key -r 4 run-shell "$tmux_sessionizer ~/github/containerdata"
-unbind C-y
-bind-key -r C-y run-shell "$tmux_sessionizer /System/Volumes/Data/mnt/containerdata_nfs"
-unbind C-h
-bind-key -r C-h run-shell "$tmux_sessionizer ~"
-unbind C-m
-bind-key -r C-m run-shell "$tmux_sessionizer ~/github/containerdata-public"
-unbind 3
-bind-key -r 3 run-shell "$tmux_sessionizer ~/github/go"
-# Leaving this in quotes because iCloud dir has a white space
-unbind C-g
-bind-key -r C-g run-shell "$tmux_sessionizer ~/github/php"
-# bind-key -r C-g run-shell "$tmux_sessionizer '$HOME/Library/Mobile Documents/com~apple~CloudDocs/github/macos-setup'"
-
-unbind C-w
-bind-key -r C-w run-shell "$tmux_sshonizer_agen docker3"
-unbind C-q
-bind-key -r C-q run-shell "$tmux_sshonizer_agen prodkubecp3"
-unbind C-a
-bind-key -r C-a run-shell "$tmux_sshonizer_agen dns3"
-unbind C-d
-bind-key -r C-d run-shell "$tmux_sshonizer_agen lb3"
-unbind C-f
-bind-key -r C-f run-shell "$tmux_sshonizer_agen prodkubew3"
-unbind C-x
-bind-key -r C-x run-shell "$tmux_sshonizer_agen storage3"
-unbind C-c
-bind-key -r C-c run-shell "$tmux_sshonizer_agen xocli3"
-
-unbind f
-bind-key -r f run-shell "tmux neww $tmux_sessionizer"
-unbind 5
-# Notice I'm passing 2 arguments, it's going to fzf inside that 2nd argument
-bind-key -r 5 run-shell "tmux neww $tmux_sessionizer irrelevant-arg ~/github/goto"
-unbind C-v
-bind-key -r C-v run-shell "tmux neww $ssh_select"
-unbind C-n
-bind-key -r C-n run-shell "tmux neww $ssh_config_select"
-unbind 1
-bind-key -r 1 run-shell "tmux neww $daily_note"
-unbind 2
-bind-key -r 2 run-shell "tmux neww $karabiner_rules"
-unbind 6
-bind-key -r 6 run-shell "tmux neww $colorscheme_selector"
-unbind 7
-bind-key -r 7 run-shell "tmux neww $script_selector"
-unbind 8
-bind-key -r 8 run-shell "$tmux_sessionizer ~/github/dotfiles-private"
-
 ###############################################################################
 
 # Reload the tmux configuration, display a 2 second message
@@ -353,13 +290,14 @@ bind -r Left resize-pane -L 1
 bind -r Down resize-pane -D 1
 bind -r Up resize-pane -U 1
 bind -r Right resize-pane -R 1
-
 # Change the keybinding to enter copy mode from 'prefix + [' to 'prefix + v'
 unbind v
 bind v copy-mode
 
 # Bind Esc to exit copy-mode
 bind-key -T copy-mode-vi 'Escape' send -X cancel
+bind ] paste-buffer
+bind P run "wl-paste --no-newline | tmux load-buffer - && tmux paste-buffer"
 
 # start selecting text with "v", this is visual mode
 bind-key -T copy-mode-vi 'v' send -X begin-selection
@@ -514,6 +452,7 @@ set -g @plugin 'catppuccin/tmux#v0.3.0'
 # set -g @plugin 'catppuccin/tmux#latest'
 # or frappe, macchiato, mocha
 set -g @catppuccin_flavor 'mocha'
+set -g @catppuccin_status_background "default"
 
 run-shell "~/github/dotfiles-latest/tmux/tools/linkarzu/set_tmux_colors.sh"
 
@@ -579,17 +518,17 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 
 # # persist tmux sessions after computer restart
 # # https://github.com/tmux-plugins/tmux-resurrect
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 # # allow tmux-ressurect to capture pane contents
-# set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-capture-pane-contents 'on'
 
 # # automatically saves sessions for you every 15 minutes (this must be the last plugin)
 # # https://github.com/tmux-plugins/tmux-continuum
-# set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-continuum'
 # # enable tmux-continuum functionality
-# set -g @continuum-restore 'on'
+set -g @continuum-restore 'on'
 # # Set the save interval in minutes, default is 15
-# set -g @continuum-save-interval '5'
+set -g @continuum-save-interval '5'
 
 # Initialize TMUX plugin manager
 # (keep this line at the very bottom of tmux.conf)

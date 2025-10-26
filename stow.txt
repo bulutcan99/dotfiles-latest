@@ -1,7 +1,6 @@
 1) zshrc:
 ln -sf ~/github/dotfiles-latest/zshrc/zshrc-file.sh ~/.zshrc
 
-
 2) ghostty:
 cd ~/github/dotfiles-latest
 stow --target=$HOME ghostty
@@ -15,3 +14,6 @@ ln -sfn ~/github/dotfiles-latest/neovim/neobean ~/.config/nvim
 
 5) tmux:
 ln -sfn ~/github/dotfiles-latest/tmux/tmux.conf.sh ~/.tmux.conf
+
+6)
+yay -S base-devel rust go python python-pip nodejs npm jdk-openjdk

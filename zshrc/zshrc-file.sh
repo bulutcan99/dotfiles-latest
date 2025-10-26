@@ -32,3 +32,4 @@ if [ "$OS" = 'Mac' ]; then
 elif [ "$OS" = 'Linux' ]; then
   source ~/github/dotfiles-latest/zshrc/zshrc-linux.sh
 fi
+export PATH="$HOME/.local/bin:$PATH"
