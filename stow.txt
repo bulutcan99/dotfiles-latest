@@ -16,4 +16,4 @@ ln -sfn ~/github/dotfiles-latest/neovim/neobean ~/.config/nvim
 ln -sfn ~/github/dotfiles-latest/tmux/tmux.conf.sh ~/.tmux.conf
 
 6)
-yay -S base-devel rust go python python-pip nodejs npm jdk-openjdk
+yay -S base-devel rustup go python python-pip nodejs npm jdk-openjdk
