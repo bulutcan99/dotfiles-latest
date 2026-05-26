@@ -8,52 +8,8 @@ export TERM=xterm-256color
 
 alias ls='ls --color=auto'
 
-echo "Updating packages, please wait (wont upgrade)..."
-sudo apt-get update >/dev/null 2>&1
 
-# Initialize Starship, if installed, otherwise install it
-# Extract the last digit of $HOST
-last_digit="${HOST: -1}"
-# Determine the Starship config file to use
-case $last_digit in
-1)
-  starship_file="starship1.toml"
-  ;;
-2)
-  starship_file="starship2.toml"
-  ;;
-3)
-  starship_file="starship3.toml"
-  ;;
-*)
-  starship_file="starship4.toml"
-  ;;
-esac
-
-install_this_package="yes"
-if command -v starship &>/dev/null; then
-  # This is what applies the specific profile
-  export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/$starship_file >/dev/null 2>&1
-  eval "$(starship init zsh)" >/dev/null 2>&1
-else
-  if [ "$install_this_package" != "no" ]; then
-    echo
-    echo "Installing starship, please wait..."
-    # -y at the end answers 'yes' to any prompts
-    curl -sS https://starship.rs/install.sh | sh -s - -y 2>&1 >/dev/null
-    # Verify starship installation
-    if ! command -v starship >/dev/null 2>&1; then
-      echo -e "${boldRed}Warning: Failed to install Starship. Check this manually${noColor}"
-      # sleep 1
-    else
-      # After installing, initialize it
-      eval "$(starship init zsh)"
-      # This is what applies the specific profile
-      export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/$starship_file
-      echo "Starship installed successfully."
-    fi
-  fi
-fi
+# Starship is initialized by HyDE's prompt system ($ZDOTDIR/prompt.zsh)
 
 # Initialize z.lua, if it is installed
 # If not installed, this will install lua and then z.lua

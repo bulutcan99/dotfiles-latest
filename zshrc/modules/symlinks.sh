@@ -84,10 +84,18 @@ create_symlink ~/github/dotfiles-latest/ubersicht/.simplebarrc ~/.simplebarrc
 create_symlink ~/github/dotfiles-latest/eligere/.eligere.json ~/.eligere.json
 create_symlink ~/github/dotfiles-latest/eligere/eligere.toml ~/.config/eligere/.eligere.toml
 if command -v code &>/dev/null; then
-  create_symlink ~/github/dotfiles-latest/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    create_symlink ~/github/dotfiles-latest/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+  else
+    create_symlink ~/github/dotfiles-latest/vscode/settings.json "$HOME/.config/Code/User/settings.json"
+  fi
 fi
 if command -v lazygit &>/dev/null; then
-  create_symlink ~/github/dotfiles-latest/lazygit/config.yml "$HOME/Library/Application Support/lazygit/config.yml"
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    create_symlink ~/github/dotfiles-latest/lazygit/config.yml "$HOME/Library/Application Support/lazygit/config.yml"
+  else
+    create_symlink ~/github/dotfiles-latest/lazygit/config.yml "$HOME/.config/lazygit/config.yml"
+  fi
 fi
 # create_symlink ~/github/dotfiles-latest/mouseless/config.yaml "$HOME/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml"
 
