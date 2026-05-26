@@ -32,3 +32,31 @@ if [ "$OS" = 'Mac' ]; then
 elif [ "$OS" = 'Linux' ]; then
   source ~/github/dotfiles-latest/zshrc/zshrc-linux.sh
 fi
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="/home/bulutcan/.npm-global/bin:$PATH"
+
+# fzf
+export FZF_DEFAULT_OPTS="
+  --height=40%
+  --layout=reverse
+  --border
+  --inline-info
+"
+
+# zoxide
+export _ZO_FZF_OPTS="
+  --height=40%
+  --layout=reverse
+  --border
+"
+
+eval "$(zoxide init zsh --cmd cd)"
+
+# Dotfiles Automation
+alias dot-save='/home/bulutcan/dotfiles/save.sh'
+
+# Ensure SSH Agent is active
+eval $(ssh-agent -s) > /dev/null
+ssh-add ~/.ssh/id_ed25519 > /dev/null 2>&1

@@ -154,6 +154,9 @@ bind -n d if -F '#{==:#{pane_mode},tree-mode}' 'send x' 'send d'
 # Use 'D' instead of 'X' to delete all tagged panes
 bind -n D if -F '#{==:#{pane_mode},tree-mode}' 'send X' 'send D'
 
+# Opens a floating scratch buffer bypassing the dashboard
+bind-key s display-popup -w 80% -h 80% -E "nvim -c 'set buftype=nofile bufhidden=hide noswapfile' Scratch"
+
 # Search sessions using an fzf menu
 # Found this gem down here:
 # https://github.com/majjoha/dotfiles/blob/cd6f966d359e16b3a7c149f96d4edb8a83e769db/.config/tmux/tmux.conf#L41
