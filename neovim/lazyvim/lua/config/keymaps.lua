@@ -2,45 +2,22 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 
--- Buffer editing
-keymap.set("n", "<tab>", function()
-  vim.cmd("bnext")
-end, { desc = "Go to next buffer" })
-keymap.set("n", "<S-tab>", function()
-  vim.cmd("bprev")
-end, { desc = "Go to previous buffer" })
+local function toggle_float_term()
+  Snacks.terminal.toggle()
+end
 
--- Close all buffers
-keymap.set("n", "<leader>bO", function()
-  local buffers = vim.api.nvim_list_bufs()
-  for _, buf in ipairs(buffers) do
-    if vim.api.nvim_buf_is_loaded(buf) then
-      vim.api.nvim_buf_delete(buf, { force = true })
-    end
-  end
+vim.keymap.set("n", "<C-p>", toggle_float_term, { desc = "Toggle float terminal" })
+vim.keymap.set({ "n", "t" }, "<C-a>", toggle_float_term, { desc = "Close float terminal" })
 
-  -- Create a new empty buffer
-  vim.cmd("enew") -- :enew = empty, new buffer
-end, { desc = "Close ALL buffers and open a new empty buffer" })
+vim.keymap.set("n", "<leader>e", function()
+  local root = LazyVim and LazyVim.root and LazyVim.root() or vim.uv.cwd()
+  require("mini.files").open(root, true)
+end, { desc = "Explorer mini.files (root dir)" })
 
--- Scratch Buffer (Throwaway)
-keymap.set("n", "<leader>K", function()
-  vim.cmd("enew")
-  vim.bo.buftype = "nofile"
-  vim.bo.bufhidden = "hide"
-  vim.bo.swapfile = false
-end, { desc = "Open a temporary scratch buffer" })
-
--- Marks
-vim.keymap.set("n", "dar", function()
-  vim.cmd("delm! | delm A-Z0-9")
-end, { desc = "Delete all a-z / A-Z marks" })
-
--- Terminal
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })
-
--- Clear all marks (normal mode)
-vim.keymap.set("n", "<leader>dm", ":delmarks a-z A-Z 0-9<CR>", { desc = "Delete all marks", noremap = true })
+vim.keymap.set("n", "<leader>E", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  require("mini.files").open(path ~= "" and path or vim.uv.cwd(), true)
+end, { desc = "Explorer mini.files (current file)" })
