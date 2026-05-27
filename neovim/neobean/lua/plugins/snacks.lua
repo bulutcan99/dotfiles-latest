@@ -15,6 +15,13 @@ return {
   {
     "folke/snacks.nvim",
     keys = {
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
       -- I use this keymap with mini.files, but snacks explorer was taking over
       -- https://github.com/folke/snacks.nvim/discussions/949
       { "<leader>e", false },

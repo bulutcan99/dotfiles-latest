@@ -100,10 +100,13 @@ fi
 # create_symlink ~/github/dotfiles-latest/mouseless/config.yaml "$HOME/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml"
 
 # Creating symlinks for directories
-create_symlink ~/github/dotfiles-latest/neovim/neobean/ ~/.config/neobean
-create_symlink ~/github/dotfiles-latest/neovim/quarto-nvim-kickstarter/ ~/.config/quarto-nvim-kickstarter
-create_symlink ~/github/dotfiles-latest/neovim/kickstart.nvim/ ~/.config/kickstart.nvim
-create_symlink ~/github/dotfiles-latest/neovim/lazyvim/ ~/.config/lazyvim
+# Neovim was reset to a fresh LazyVim starter in ~/.config/nvim.
+# Keep the existing shell alias (NVIM_APPNAME=lazyvim nvim) pointed at it,
+# and do not recreate the older local Neovim app configs on shell startup.
+# create_symlink ~/github/dotfiles-latest/neovim/neobean/ ~/.config/neobean
+# create_symlink ~/github/dotfiles-latest/neovim/quarto-nvim-kickstarter/ ~/.config/quarto-nvim-kickstarter
+# create_symlink ~/github/dotfiles-latest/neovim/kickstart.nvim/ ~/.config/kickstart.nvim
+create_symlink ~/.config/nvim ~/.config/lazyvim
 create_symlink ~/github/dotfiles-latest/hammerspoon/ ~/.hammerspoon
 # create_symlink ~/github/dotfiles-latest/karabiner/mxstbr/ ~/.config/karabiner
 create_symlink ~/github/dotfiles-latest/karabiner/ ~/.config/karabiner

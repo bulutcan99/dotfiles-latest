@@ -19,12 +19,12 @@ os:
   #
   # You can add `>/dev/null 2>&1 &` at the end of each option so that the
   # lazygit in the terminal is not locked while neovide is open
-  # edit: 'NVIM_APPNAME="neobean" Neovide {{filename}} >/dev/null 2>&1 &'
-  # editAtLine: 'NVIM_APPNAME="neobean" Neovide -- {{filename}} --line={{line}} >/dev/null 2>&1 &'
-  edit: 'NVIM_APPNAME="neobean" Neovide {{filename}}'
-  editAtLine: 'NVIM_APPNAME="neobean" Neovide -- {{filename}} --line={{line}}'
+  # edit: 'NVIM_APPNAME="lazyvim" Neovide {{filename}} >/dev/null 2>&1 &'
+  # editAtLine: 'NVIM_APPNAME="lazyvim" Neovide -- {{filename}} --line={{line}} >/dev/null 2>&1 &'
+  edit: 'NVIM_APPNAME="lazyvim" Neovide {{filename}}'
+  editAtLine: 'NVIM_APPNAME="lazyvim" Neovide -- {{filename}} --line={{line}}'
   #
-  # editAtLineAndWait: 'NVIM_APPNAME="neobean" Neovide -- {{filename}} --line={{line}}'
+  # editAtLineAndWait: 'NVIM_APPNAME="lazyvim" Neovide -- {{filename}} --line={{line}}'
   #
   # If this is set to true, when editing a file from lazygit, it opens it in the
   # terminal, instead of Neovide, and you cannot go back to lazygit

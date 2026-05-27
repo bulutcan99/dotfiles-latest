@@ -262,12 +262,12 @@ export PATH="$PATH:/Users/linkarzu/.lmstudio/bin"
 # "vk" opens kickstart and "vl" opens lazyvim
 #
 # NOTE: Previously I was doing:
-# v='export NVIM_APPNAME="neobean" && nvim'
+# v='export NVIM_APPNAME="lazyvim" && nvim'
 # Notice this exports the NVIM_APPNAME variable, so if after that I just run `nvim` it
 # will run the last config, thanks to @dulajdisanayaka for bringing it up in my video:
 # "Is Neovide just for Visual Effects? | Open LazyGit files, Disable Plugins, TMUX and more"
 # https://youtu.be/rNYtfA4zlO4
-alias v='NVIM_APPNAME=neobean nvim'
+alias v='NVIM_APPNAME=lazyvim nvim'
 alias vq='NVIM_APPNAME=quarto-nvim-kickstarter nvim'
 alias vk='NVIM_APPNAME=kickstart.nvim nvim'
 alias vl='NVIM_APPNAME=lazyvim nvim'

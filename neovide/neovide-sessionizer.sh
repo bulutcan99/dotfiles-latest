@@ -12,4 +12,4 @@
 # script below mic.sh
 export PATH="/opt/homebrew/bin:$PATH"
 
-bash -c "cd '$HOME/github/dotfiles-latest' && NVIM_APPNAME=neobean Neovide"
+bash -c "cd '$HOME/github/dotfiles-latest' && NVIM_APPNAME=lazyvim Neovide"

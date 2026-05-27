@@ -7,6 +7,8 @@
 export TERM=xterm-256color
 
 alias ls='ls --color=auto'
+alias nvim='NVIM_APPNAME=lazyvim command nvim'
+alias v='NVIM_APPNAME=lazyvim command nvim'
 
 
 # Starship is initialized by HyDE's prompt system ($ZDOTDIR/prompt.zsh)

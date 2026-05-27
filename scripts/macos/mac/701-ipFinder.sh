@@ -2,7 +2,7 @@
 set -euo pipefail
 
 nvim_cmd() {
-  NVIM_APPNAME=neobean nvim "$@"
+  NVIM_APPNAME=lazyvim nvim "$@"
 }
 
 base_dir="$HOME/github/dotfiles-private/scripts/macos/mac/subnet-finder"

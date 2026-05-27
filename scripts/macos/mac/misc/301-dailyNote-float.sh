@@ -54,7 +54,7 @@ kitten @ launch \
   --type=overlay \
   --title "DailyNote" \
   --cwd "$note_dir" \
-  /bin/zsh -i -c "export NVIM_APPNAME=neobean; nvim '$full_path'"
+  /bin/zsh -i -c "export NVIM_APPNAME=lazyvim; nvim '$full_path'"
 
 ###############################################################################
 #                      Daily note with Tmux Sessions

@@ -203,6 +203,18 @@ bind i select-window -t 2
 bind o select-window -t 3
 bind p select-window -t 4
 
+# Keep tmux numeric window selection explicit; custom launchers below must not steal prefix+number.
+bind-key 0 select-window -t:=0
+bind-key 1 select-window -t:=1
+bind-key 2 select-window -t:=2
+bind-key 3 select-window -t:=3
+bind-key 4 select-window -t:=4
+bind-key 5 select-window -t:=5
+bind-key 6 select-window -t:=6
+bind-key 7 select-window -t:=7
+bind-key 8 select-window -t:=8
+bind-key 9 select-window -t:=9
+
 # Switch to sessions 1 through 4
 # ctrl+b : -> new -s 0 -> new session with name '0'
 # ctrl+b $ -> rename current session
@@ -281,16 +293,12 @@ unbind C-p
 bind-key -r C-p run-shell "$tmux_sessionizer ~/github/scripts"
 unbind C-t
 bind-key -r C-t run-shell "$tmux_sessionizer ~/github/obsidian_main"
-unbind 4
-bind-key -r 4 run-shell "$tmux_sessionizer ~/github/containerdata"
 unbind C-y
 bind-key -r C-y run-shell "$tmux_sessionizer /System/Volumes/Data/mnt/containerdata_nfs"
 unbind C-h
 bind-key -r C-h run-shell "$tmux_sessionizer ~"
 unbind C-m
 bind-key -r C-m run-shell "$tmux_sessionizer ~/github/containerdata-public"
-unbind 3
-bind-key -r 3 run-shell "$tmux_sessionizer ~/github/go"
 # Leaving this in quotes because iCloud dir has a white space
 unbind C-g
 bind-key -r C-g run-shell "$tmux_sessionizer ~/github/php"
@@ -313,23 +321,10 @@ bind-key -r C-c run-shell "$tmux_sshonizer_agen xocli3"
 
 unbind f
 bind-key -r f run-shell "tmux neww $tmux_sessionizer"
-unbind 5
-# Notice I'm passing 2 arguments, it's going to fzf inside that 2nd argument
-bind-key -r 5 run-shell "tmux neww $tmux_sessionizer irrelevant-arg ~/github/goto"
 unbind C-v
 bind-key -r C-v run-shell "tmux neww $ssh_select"
 unbind C-n
 bind-key -r C-n run-shell "tmux neww $ssh_config_select"
-unbind 1
-bind-key -r 1 run-shell "tmux neww $daily_note"
-unbind 2
-bind-key -r 2 run-shell "tmux neww $karabiner_rules"
-unbind 6
-bind-key -r 6 run-shell "tmux neww $colorscheme_selector"
-unbind 7
-bind-key -r 7 run-shell "tmux neww $script_selector"
-unbind 8
-bind-key -r 8 run-shell "$tmux_sessionizer ~/github/dotfiles-private"
 
 ###############################################################################
 
@@ -580,19 +575,19 @@ set -g @catppuccin_status_default "on"
 # 'vim-tmux-navigator' plugin inside neovim
 set -g @plugin 'christoomey/vim-tmux-navigator'
 
-# # persist tmux sessions after computer restart
-# # https://github.com/tmux-plugins/tmux-resurrect
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
-# # allow tmux-ressurect to capture pane contents
-# set -g @resurrect-capture-pane-contents 'on'
+# persist tmux sessions after computer restart
+# https://github.com/tmux-plugins/tmux-resurrect
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+# allow tmux-ressurect to capture pane contents
+set -g @resurrect-capture-pane-contents 'on'
 
-# # automatically saves sessions for you every 15 minutes (this must be the last plugin)
-# # https://github.com/tmux-plugins/tmux-continuum
-# set -g @plugin 'tmux-plugins/tmux-continuum'
-# # enable tmux-continuum functionality
-# set -g @continuum-restore 'on'
-# # Set the save interval in minutes, default is 15
-# set -g @continuum-save-interval '5'
+# automatically saves sessions for you every 15 minutes (this must be the last plugin)
+# https://github.com/tmux-plugins/tmux-continuum
+set -g @plugin 'tmux-plugins/tmux-continuum'
+# enable tmux-continuum functionality
+set -g @continuum-restore 'on'
+# Set the save interval in minutes, default is 15
+set -g @continuum-save-interval '5'
 
 # Initialize TMUX plugin manager
 # (keep this line at the very bottom of tmux.conf)

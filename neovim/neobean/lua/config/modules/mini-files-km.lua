@@ -19,6 +19,13 @@ M.setup = function(opts)
       -- Ensure opts.custom_keymaps exists
       local keymaps = opts.custom_keymaps or {}
 
+      vim.keymap.set(
+        "n",
+        "q",
+        mini_files.close,
+        { buffer = buf_id, noremap = true, silent = true, desc = "[P]Close mini.files" }
+      )
+
       -- Open the highlighted directory in a tmux pane on the right
       vim.keymap.set("n", keymaps.open_tmux_pane, function()
         -- vim.keymap.set("n", ",", function()
