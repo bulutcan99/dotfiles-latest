@@ -1,6 +1,6 @@
 return {
   {
-    "mason-org/mason.nvim",
+    "williamboman/mason.nvim",
     opts = function(_, opts)
       local seen = {}
       opts.ensure_installed = vim.tbl_filter(function(tool)
