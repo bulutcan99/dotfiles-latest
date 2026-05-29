@@ -1,5 +1,19 @@
 # Contents
 
+## Bulutcan Arch bootstrap
+
+Bu forkta yeni Arch Linux kurulumunu hizlandiran bootstrap akisi var:
+
+```bash
+sudo pacman -Syu --needed git curl
+mkdir -p ~/github
+git clone https://github.com/bulutcan99/dotfiles-latest.git ~/github/dotfiles-latest
+cd ~/github/dotfiles-latest
+./install.sh
+```
+
+Detaylar ve opsiyonlar: [ARCH_BOOTSTRAP.md](./ARCH_BOOTSTRAP.md)
+
 <!-- toc -->
 
 - [Contributing](#contributing)

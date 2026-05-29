@@ -1,4 +1,4 @@
-# Add Debian-specific configurations here
+# Add Linux-specific configurations here
 # For example, you can add z.lua config for Linux here, if not installed will install them
 
 # Using xterm-kitty as in macOS on my Debian servers is a nightmare
@@ -11,7 +11,10 @@ alias nvim='NVIM_APPNAME=lazyvim command nvim'
 alias v='NVIM_APPNAME=lazyvim command nvim'
 
 
-# Starship is initialized by HyDE's prompt system ($ZDOTDIR/prompt.zsh)
+if command -v starship &>/dev/null && [ ! -f "${ZDOTDIR:-$HOME/.config/zsh}/prompt.zsh" ]; then
+  export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/active-config.toml
+  eval "$(starship init zsh)" >/dev/null 2>&1
+fi
 
 # Initialize z.lua, if it is installed
 # If not installed, this will install lua and then z.lua
@@ -137,6 +140,9 @@ fi
 install_this_package="yes"
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
+elif [ -f /usr/share/fzf/key-bindings.zsh ]; then
+  source /usr/share/fzf/key-bindings.zsh
+  [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 else
   if [ "$install_this_package" != "no" ]; then
     echo

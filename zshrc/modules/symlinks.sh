@@ -1,23 +1,31 @@
+ensure_dir() {
+  if [ -L "$1" ]; then
+    return 0
+  fi
+
+  mkdir -p "$1"
+}
+
 # ~/.config is used by neovim, alacritty and karabiner
-mkdir -p ~/.config
+ensure_dir ~/.config
 # Alacritty is inside its own dir
-mkdir -p ~/.config/alacritty
+ensure_dir ~/.config/alacritty
 # Kitty is inside its own dir
-mkdir -p ~/.config/kitty/
-mkdir -p ~/.config/wezterm/
-mkdir -p ~/.config/ghostty
+ensure_dir ~/.config/kitty/
+ensure_dir ~/.config/wezterm/
+ensure_dir ~/.config/ghostty
 # Creating obsidian directory
 # Even if you don't use obsidian, don't remove this dir to avoid warnings
-mkdir -p ~/github/obsidian_main
-mkdir -p ~/.config/neovide
-mkdir -p ~/.config/rio
-mkdir -p ~/.config/yazi
-mkdir -p ~/.config/btop
-mkdir -p ~/.config/fastfetch
-mkdir -p ~/.config/sesh
-mkdir -p ~/.config/eligere
-mkdir -p ~/.config/aerospace
-mkdir -p ~/.config/skhd
+ensure_dir ~/github/obsidian_main
+ensure_dir ~/.config/neovide
+ensure_dir ~/.config/rio
+ensure_dir ~/.config/yazi
+ensure_dir ~/.config/btop
+ensure_dir ~/.config/fastfetch
+ensure_dir ~/.config/sesh
+ensure_dir ~/.config/eligere
+ensure_dir ~/.config/aerospace
+ensure_dir ~/.config/skhd
 
 # Create the symlinks I normally use
 # ~/.config dir holds nvim, neofetch, alacritty configs
@@ -29,6 +37,15 @@ create_symlink() {
   local source_path=$1
   local target_path=$2
   local backup_needed=true
+
+  if [ ! -e "$source_path" ] && [ ! -L "$source_path" ]; then
+    if [ "${DOTFILES_SYMLINK_VERBOSE:-0}" = "1" ]; then
+      echo -e "${boldYellow}Skipping missing source: '$source_path'${noColor}"
+    fi
+    return 0
+  fi
+
+  mkdir -p "$(dirname "$target_path")"
 
   # echo
 
@@ -100,12 +117,13 @@ fi
 # create_symlink ~/github/dotfiles-latest/mouseless/config.yaml "$HOME/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml"
 
 # Creating symlinks for directories
-# Neovim was reset to a fresh LazyVim starter in ~/.config/nvim.
+# Neovim was reset to a fresh LazyVim starter in dotfiles-latest/nvim.
 # Keep the existing shell alias (NVIM_APPNAME=lazyvim nvim) pointed at it,
 # and do not recreate the older local Neovim app configs on shell startup.
 # create_symlink ~/github/dotfiles-latest/neovim/neobean/ ~/.config/neobean
 # create_symlink ~/github/dotfiles-latest/neovim/quarto-nvim-kickstarter/ ~/.config/quarto-nvim-kickstarter
 # create_symlink ~/github/dotfiles-latest/neovim/kickstart.nvim/ ~/.config/kickstart.nvim
+create_symlink ~/github/dotfiles-latest/nvim ~/.config/nvim
 create_symlink ~/.config/nvim ~/.config/lazyvim
 create_symlink ~/github/dotfiles-latest/hammerspoon/ ~/.hammerspoon
 # create_symlink ~/github/dotfiles-latest/karabiner/mxstbr/ ~/.config/karabiner
