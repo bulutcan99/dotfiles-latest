@@ -16,14 +16,14 @@ vim.keymap.set({ "n", "t" }, "<C-a>", toggle_float_term, { desc = "Close float t
 
 -- File explorer
 vim.keymap.set("n", "<leader>e", function()
-  local root = LazyVim and LazyVim.root and LazyVim.root() or vim.uv.cwd()
-  require("mini.files").open(root, true)
-end, { desc = "Explorer mini.files (root dir)" })
-
-vim.keymap.set("n", "<leader>E", function()
   local path = vim.api.nvim_buf_get_name(0)
   require("mini.files").open(path ~= "" and path or vim.uv.cwd(), true)
 end, { desc = "Explorer mini.files (current file)" })
+
+vim.keymap.set("n", "<leader>E", function()
+  local root = LazyVim and LazyVim.root and LazyVim.root() or vim.uv.cwd()
+  require("mini.files").open(root, true)
+end, { desc = "Explorer mini.files (root dir)" })
 
 -- Clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
