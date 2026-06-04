@@ -165,8 +165,6 @@ else
   fi
 fi
 
-cd ~
-
 # Check if the Meslo Nerd Font is already installed
 install_this_package="no"
 if [ "$install_this_package" != "no" ]; then
