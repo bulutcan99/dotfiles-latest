@@ -15,9 +15,26 @@ vim.keymap.set("n", "<C-p>", toggle_float_term, { desc = "Toggle float terminal"
 vim.keymap.set({ "n", "t" }, "<C-a>", toggle_float_term, { desc = "Close float terminal" })
 
 -- File explorer
+local function current_explorer_path()
+  local name = vim.api.nvim_buf_get_name(0)
+  if name == "" then
+    return vim.uv.cwd()
+  end
+
+  local stat = vim.uv.fs_stat(name)
+  if stat then
+    if stat.type == "directory" then
+      return name
+    end
+
+    return vim.fs.dirname(name)
+  end
+
+  return vim.uv.cwd()
+end
+
 vim.keymap.set("n", "<leader>e", function()
-  local path = vim.api.nvim_buf_get_name(0)
-  require("mini.files").open(path ~= "" and path or vim.uv.cwd(), true)
+  require("mini.files").open(current_explorer_path(), true)
 end, { desc = "Explorer mini.files (current file)" })
 
 vim.keymap.set("n", "<leader>E", function()
