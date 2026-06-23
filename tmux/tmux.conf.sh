@@ -203,6 +203,9 @@ bind i select-window -t 2
 bind o select-window -t 3
 bind p select-window -t 4
 
+# Ctrl+b Tab -> sonraki pane (next pane); o/p window'a gittigi icin pane gecisi burada
+bind -r Tab select-pane -t :.+
+
 # Keep tmux numeric window selection explicit; custom launchers below must not steal prefix+number.
 bind-key 0 select-window -t:=0
 bind-key 1 select-window -t:=1
